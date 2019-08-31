@@ -1,5 +1,6 @@
-# Vue Intro
-
+<p align="center>
+#Vue Intro
+</p>
 Intro to Vue. Using:
 
 <p align="center">
