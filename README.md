@@ -1,4 +1,5 @@
 #Vue Intro
+
 Intro to Vue. Using:
 
  <ul>
