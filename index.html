@@ -6,9 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue Intro JS </title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <style>
+    .btnMsg{
+        display: none;
+    }
+    </style>
 </head>
 <body>
     <div id="app">
+        <h3>App</h3>
         <input v-model="msg">
         {{msg}}
         <ul>
@@ -16,21 +22,131 @@
                 {{card}}
             </li>
         </ul>
-        <button v-on:click="btnClick" >Click me</button>
+        <button @click="btnClick" >Click me</button>
+    </div>
+    <br>
+    <div id="app2">
+            <h3>App 2</h3>
+            <span v-bind:title="msg">
+                Hover and you'll see
+            </span>
+        </div>
+        <br>
+    <div id="app3">
+            <h3>App 3</h3>
+        <!-- <span v-if="seen" v-on:hideMsg="hideMsg">  {{msg}} </span>
+        <button @clikc="$emit('hideMsg')">Hide</button> -->
+        <span v-if="seen"> Hello, do you see me? </span>
+    </div>
+    <br>
+    <div id="app4">
+        <h3>App 4</h3>
+        <ul>
+            <li v-for="todo in todos">
+                {{ todo.text}}
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div id="app5">
+        <p>
+            {{ msg}}
+        </p>
+        <button v-on:click="reverseMessage">
+            Reverse Message
+        </button>
+    </div>
+    <div id="app6">
+        <h3>Appp 6</h3>
+        <ol>
+            <todo-item></todo-item>
+        </ol>
+    </div>
+    <div id="app7">
+        <h3>App 7</h3>
+        <ol>
+            <todo-item2 
+            v-for="item in list"
+            v-bind:todo="item"
+            v-bind:key="item.id">
+            </todo-item2>
+        </ol>
     </div>
 </body>
 <script>
-    new Vue({
+    var app = new Vue({
         el: '#app',
         data:{
             'msg': 'Hello Hiruth',
             'cardTypes': ['red', 'orange', 'green']
         }, 
         methods: {
-            btnClick: function(){
-                alert('I have been clicked')
+            btnClick(){
+                console.log('I have been clikced'),
+                alert('You clikced?')
             }
         }
     })
+    var app2 = new Vue({
+        el:'#app2',
+        data: {
+            msg: 'Loaded on ' + new Date().toLocaleString()
+        }
+    })
+    var app3 = new Vue({
+        el: '#app3',
+        msg: 'Now you see me!',
+        data: {
+            seen: true
+        },
+        // methods: {
+        //     hideMsg: function(){
+        //         this.msg = this.msg.false;
+        //                     }
+        // }
+    })
+    var app4 = new Vue({
+        el:'#app4',
+        data:{
+            todos: [
+                {text: 'learn JS'},
+                {text: 'learn Vue'},
+                {text: 'Build'}
+            ]
+        }
+    })
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            msg: 'Hi from app5'
+        },
+        methods:{
+            reverseMessage: function(){
+            this.msg = this.msg.split('').reverse().join('')
+        }
+        }      
+    })
+    //DEFINE A NEW COMPONENT
+        Vue.component('todo-item', {
+        template: '<li> This is a todo </li>'
+    })
+    var app6 = new Vue({
+        el: '#app6'
+    })
+    Vue.component('todo-item2', {
+        props: ['todo'],
+        template: '<li>{{ todo.text}}</li>'
+    })
+    var app7 = new Vue({
+        el: '#app7',
+        data: {
+            list: [
+            { id: 0, text: 'Vegetables' },
+      { id: 1, text: 'Cheese' },
+      { id: 2, text: 'Whatever else humans are supposed to eat' }
+            ]
+        }
+    })
+
 </script>
 </html>
